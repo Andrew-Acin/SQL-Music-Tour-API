@@ -2,20 +2,23 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('event', {
-      event_id: {
+    await queryInterface.createTable('set_times', {
+      id: {
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      event_id: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
-      date: {
+      stage_id: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.INTEGER
+      },
+      band_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       start_time: {
         allowNull: false,
@@ -24,10 +27,15 @@ module.exports = {
       end_time: {
         allowNull: false,
         type: Sequelize.TIME
+      },
+      set_time_id: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.INTEGER
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('event');
+    await queryInterface.dropTable('set_times');
   }
 };
