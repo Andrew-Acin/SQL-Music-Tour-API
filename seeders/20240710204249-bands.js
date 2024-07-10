@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('bands', [{
       band_id: 1,
       name: 'radio head',
@@ -24,10 +24,10 @@ module.exports = {
       available_start_time: new Date('2024-07-09T20:00:00'),
       end_time: new Date('2024-07-09T21:00:00Z')
     }
-   ])
+    ])
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete('band', null, {})
   }
 };
