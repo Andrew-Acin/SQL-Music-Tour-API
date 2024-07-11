@@ -20,10 +20,29 @@ stage.get('/', async (req, res) => {
 })
 
 // FIND A SPECIFIC EVENT
-stage.get('/:id', async (req, res) => {
+stage.get('/:name', async (req, res) => {
     try {
         const foundEvent = await Event.findOne({
-            where: { event_id: req.params.id }
+            where: { name: req.params.name },
+            include: [{
+                model: SetTime,
+                as: "set_times",
+                include: {
+                    model: Event,
+                    as: "event",
+                    where: { name: { [Op.like]: `%${req.query.event ? req.query.Event : ''}% ` } }
+                }
+            },
+            {
+                model: SetTime,
+                as: "set_times",
+                include: {
+                    model: Event,
+                    as: "event",
+                    where: { name: { [Op.like]: `%${req.query.event ? req.query.Event : ''}% ` } }
+                }
+            }
+            ]
         })
         res.status(200).json(foundEvent)
     } catch (error) {
